@@ -119,6 +119,17 @@ set_property (TARGET Ptex_static ptxinfo halftest ftest rtest wtest PROPERTY FOL
 
 set (PTEX_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/ptex/src/ptex PARENT_SCOPE)
 
+# Only do this if both targets actually exist
+if (TARGET Ptex_static AND TARGET zlibstatic)
+  install(
+    TARGETS zlibstatic
+    EXPORT Ptex             # Same export set name as used by Ptex
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+  )
+endif()
+
 ###########################################################################
 # double-conversion
 
